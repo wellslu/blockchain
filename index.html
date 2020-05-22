@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>new did</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+        <script type="text/javascript">
+            function new_did() {
+                var inputUserName = document.getElementById("name").value;
+                // alert("Set ! " + inputUserName);
+                document.getElementById("name").value = '';
+                const data = {"method": "SCcoin", "name": inputUserName, "description": "SCU eID", "pub_key":""}
+                $.ajax(
+                    {
+                        type: 'POST',
+                        url: 'http://3.87.137.58:8888/new_did',
+
+                        headers: { 'contentType': 'application/json;',
+                                    'X-API-key' : '71efe65ae128e4562fdba2292b2b3f190845c7h3'},
+                        contentType: 'application/json;',
+                        data: JSON.stringify(data),
+
+                        success: function(result){
+                            console.log(result);
+                            alert('new 成功 - ' + result);
+                        },
+
+                        error: function (error){
+                            console.log(result);
+                            alert("new 失敗 - ", result);
+                        }
+
+                    }
+                )
+
+            }
+        </script>
+    </head>
+
+    <body>
+        <form name="form" id="form">
+            User Name：
+            <input type="text" name="name" id="name" />
+            <input type="button" name="new" value="new" onclick="new_did()" />
+        </form>
+    </body>
+</html>
